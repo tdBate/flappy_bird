@@ -21,6 +21,8 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
+
+            <Rectangle x:Name="oszlop" Fill="#FF6CFF00" Height="156" Width="45" Canvas.Left="745" Canvas.Top="278" HorizontalAlignment="Center" VerticalAlignment="Top"></Rectangle>
         </Canvas>
     </Grid>
 </Window>

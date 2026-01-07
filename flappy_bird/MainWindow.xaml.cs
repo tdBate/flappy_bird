@@ -27,13 +27,15 @@ namespace flappy_bird
         {
             InitializeComponent();
             bird = rectangleBird;
-            Gravity();
+            Animation();
         }
 
-        public async void Gravity() 
+        public async void Animation() 
         {
             while (true)
             { 
+                //madar
+
                 velocity += gravity;
 
                 double topPos = Canvas.GetTop(bird);
@@ -42,9 +44,11 @@ namespace flappy_bird
 
                 if (topPos >= 450-bird.Height)
                 {
-                    Application.Current.Shutdown();
+                    Halal();
                 }
 
+                //--oszlop--
+                Canvas.SetLeft(oszlop, Canvas.GetLeft(oszlop) - 1);
 
                 await Task.Delay(10);
             }
@@ -61,6 +65,11 @@ namespace flappy_bird
             {
                 Ugras();
             }
+        }
+
+        public void Halal() 
+        {
+            Application.Current.Shutdown();
         }
     }
 }

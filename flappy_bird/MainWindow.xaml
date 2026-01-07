@@ -5,10 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:flappy_bird"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" KeyDown="Window_KeyDown">
     <Grid>
         <Canvas>
-            <Rectangle Fill="Black" x:Name="rectangleBird" Height="50" Width="50" Canvas.Left="45" Canvas.Top="31"></Rectangle>
+            <Rectangle Fill="Black" x:Name="rectangleBird" Height="50" Width="50" Canvas.Left="45" Canvas.Top="31" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
         </Canvas>
     </Grid>
 </Window>

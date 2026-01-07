@@ -21,6 +21,7 @@ namespace flappy_bird
         Rectangle bird;
         double gravity = 0.05;
         double velocity = 0;
+        double ugrasSpeed = -3;
 
         public MainWindow()
         {
@@ -32,11 +33,24 @@ namespace flappy_bird
         public async void Gravity() 
         {
             while (true)
-            {
+            { 
                 velocity += gravity;
 
                 Canvas.SetTop(bird, Canvas.GetTop(bird)+velocity);
                 await Task.Delay(10);
+            }
+        }
+
+        public void Ugras()
+        {
+            velocity = ugrasSpeed;
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space || e.Key == Key.Up || e.Key == Key.W)
+            {
+                Ugras();
             }
         }
     }

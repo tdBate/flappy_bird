@@ -1,4 +1,6 @@
 ﻿using System.Text;
+using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +18,26 @@ namespace flappy_bird
     /// </summary>
     public partial class MainWindow : Window
     {
+        Rectangle bird;
+        double gravity = 0.05;
+        double velocity = 0;
+
         public MainWindow()
         {
             InitializeComponent();
+            bird = rectangleBird;
+            Gravity();
+        }
+
+        public async void Gravity() 
+        {
+            while (true)
+            {
+                velocity += gravity;
+
+                Canvas.SetTop(bird, Canvas.GetTop(bird)+velocity);
+                await Task.Delay(10);
+            }
         }
     }
 }

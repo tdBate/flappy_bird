@@ -36,7 +36,16 @@ namespace flappy_bird
             { 
                 velocity += gravity;
 
-                Canvas.SetTop(bird, Canvas.GetTop(bird)+velocity);
+                double topPos = Canvas.GetTop(bird);
+
+                Canvas.SetTop(bird, topPos+velocity);
+
+                if (topPos >= 450-bird.Height)
+                {
+                    Application.Current.Shutdown();
+                }
+
+
                 await Task.Delay(10);
             }
         }

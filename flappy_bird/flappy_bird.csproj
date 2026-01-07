@@ -8,4 +8,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="madar.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="madar.png" />
+  </ItemGroup>
+
 </Project>

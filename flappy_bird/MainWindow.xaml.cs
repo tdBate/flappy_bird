@@ -24,6 +24,7 @@ namespace flappy_bird
         double ugrasSpeed = -3;
         List<Rectangle> oszlopok = new List<Rectangle>();
         Random rnd = new Random();
+        double elozoPos = 800;
 
         public MainWindow()
         {
@@ -31,43 +32,52 @@ namespace flappy_bird
             bird = rectangleBird;
             SetUp();
             Animation();
+        } 
+
+        public async void SetUp()
+        {
+            for (int i = 0; i < 8; i++) 
+            {
+                UjOszlop();
+                //await Task.Delay(3000);
+            }
+            
         }
 
-        public void SetUp()
+        public void UjOszlop()
         {
             int oszlopHeight = 140;
             int oszlopWidht = 40;
-            for (int i = 0; i < 1000; i++) 
-            {
-                int gap = rnd.Next(50, 100);
-                if (rnd.Next(2) == 0) gap *= -1;
-                 
-                Rectangle oszlop = new Rectangle()
-                {
-                    Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6CFF00"),
-                    Height = oszlopHeight- gap,
-                    Width = oszlopWidht
-                };
-
-                Rectangle oszlopBottom = new Rectangle()
-                {
-                    Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6CFF00"),
-                    Height = oszlopHeight+gap,
-                    Width = oszlopWidht
-                };
-
-                oszlopok.Add(oszlop);
-                oszlopok.Add(oszlopBottom);
-                canvas.Children.Add(oszlop);
-                canvas.Children.Add(oszlopBottom);
-
-                double oszlopLeftPos = 800 + i * 300 + rnd.Next(100, 200);
-                Canvas.SetLeft(oszlop, oszlopLeftPos);
-                Canvas.SetLeft(oszlopBottom, oszlopLeftPos);
-                Canvas.SetTop(oszlop, 0);
-                Canvas.SetTop(oszlopBottom, -gap+450-oszlopHeight);
-            }
             
+
+            int gap = rnd.Next(50, 100);
+            if (rnd.Next(2) == 0) gap *= -1;
+
+            Rectangle oszlop = new Rectangle()
+            {
+                Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6CFF00"),
+                Height = oszlopHeight - gap,
+                Width = oszlopWidht
+            };
+
+            Rectangle oszlopBottom = new Rectangle()
+            {
+                Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6CFF00"),
+                Height = oszlopHeight + gap,
+                Width = oszlopWidht
+            };
+
+            oszlopok.Add(oszlop);
+            oszlopok.Add(oszlopBottom);
+            canvas.Children.Add(oszlop);
+            canvas.Children.Add(oszlopBottom);
+
+            double oszlopLeftPos = elozoPos + rnd.Next(100, 200);
+            Canvas.SetLeft(oszlop, oszlopLeftPos);
+            Canvas.SetLeft(oszlopBottom, oszlopLeftPos);
+            Canvas.SetTop(oszlop, 0);
+            Canvas.SetTop(oszlopBottom, -gap + 450 - oszlopHeight);
+            elozoPos = Canvas.GetLeft(oszlop);
         }
 
         public async void Animation() 
@@ -96,6 +106,7 @@ namespace flappy_bird
                     {
                         canvas.Children.Remove(oszlopok[i]);
                         oszlopok.RemoveAt(i);
+                        UjOszlop();
                     }
                 }
 

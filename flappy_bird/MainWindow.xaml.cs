@@ -36,6 +36,7 @@ namespace flappy_bird
         public void SetUp()
         {
             int oszlopHeight = 140;
+            int oszlopWidht = 40;
             for (int i = 0; i < 1000; i++) 
             {
                 int gap = rnd.Next(50, 100);
@@ -45,14 +46,14 @@ namespace flappy_bird
                 {
                     Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6CFF00"),
                     Height = oszlopHeight- gap,
-                    Width = 40
+                    Width = oszlopWidht
                 };
 
                 Rectangle oszlopBottom = new Rectangle()
                 {
                     Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6CFF00"),
                     Height = oszlopHeight+gap,
-                    Width = 40
+                    Width = oszlopWidht
                 };
 
                 oszlopok.Add(oszlop);
@@ -89,7 +90,13 @@ namespace flappy_bird
                 //--oszlop--
                 for (int i = 0; i < oszlopok.Count; i++)
                 {
-                    Canvas.SetLeft(oszlopok[i], Canvas.GetLeft(oszlopok[i]) - 1);
+                    double oszlopPos = Canvas.GetLeft(oszlopok[i]);
+                    Canvas.SetLeft(oszlopok[i], oszlopPos - 1);
+                    if (oszlopPos < -40)
+                    {
+                        canvas.Children.Remove(oszlopok[i]);
+                        oszlopok.RemoveAt(i);
+                    }
                 }
 
                 await Task.Delay(10);

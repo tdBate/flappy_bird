@@ -7,7 +7,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
+ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -22,12 +22,51 @@ namespace flappy_bird
         double gravity = 0.05;
         double velocity = 0;
         double ugrasSpeed = -3;
+        List<Rectangle> oszlopok = new List<Rectangle>();
+        Random rnd = new Random();
 
         public MainWindow()
         {
             InitializeComponent();
             bird = rectangleBird;
+            SetUp();
             Animation();
+        }
+
+        public void SetUp()
+        {
+            int oszlopHeight = 140;
+            for (int i = 0; i < 1000; i++) 
+            {
+                int gap = rnd.Next(50, 100);
+                if (rnd.Next(2) == 0) gap *= -1;
+                 
+                Rectangle oszlop = new Rectangle()
+                {
+                    Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6CFF00"),
+                    Height = oszlopHeight- gap,
+                    Width = 40
+                };
+
+                Rectangle oszlopBottom = new Rectangle()
+                {
+                    Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6CFF00"),
+                    Height = oszlopHeight+gap,
+                    Width = 40
+                };
+
+                oszlopok.Add(oszlop);
+                oszlopok.Add(oszlopBottom);
+                canvas.Children.Add(oszlop);
+                canvas.Children.Add(oszlopBottom);
+
+                double oszlopLeftPos = 800 + i * 300 + rnd.Next(100, 200);
+                Canvas.SetLeft(oszlop, oszlopLeftPos);
+                Canvas.SetLeft(oszlopBottom, oszlopLeftPos);
+                Canvas.SetTop(oszlop, 0);
+                Canvas.SetTop(oszlopBottom, -gap+450-oszlopHeight);
+            }
+            
         }
 
         public async void Animation() 
@@ -48,7 +87,10 @@ namespace flappy_bird
                 }
 
                 //--oszlop--
-                Canvas.SetLeft(oszlop, Canvas.GetLeft(oszlop) - 1);
+                for (int i = 0; i < oszlopok.Count; i++)
+                {
+                    Canvas.SetLeft(oszlopok[i], Canvas.GetLeft(oszlopok[i]) - 1);
+                }
 
                 await Task.Delay(10);
             }

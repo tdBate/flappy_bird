@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" KeyDown="Window_KeyDown" ResizeMode="NoResize">
     <Grid>
-        <Canvas>
+        <Canvas x:Name="canvas">
             <Rectangle x:Name="rectangleBird" Height="100" Width="100" Canvas.Left="45" Canvas.Top="31" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/madar.png" Stretch="Fill"/>
@@ -22,7 +22,7 @@
                 </Rectangle.RenderTransform>
             </Rectangle>
 
-            <Rectangle x:Name="oszlop" Fill="#FF6CFF00" Height="156" Width="45" Canvas.Left="745" Canvas.Top="278" HorizontalAlignment="Center" VerticalAlignment="Top"></Rectangle>
+            
         </Canvas>
     </Grid>
 </Window>

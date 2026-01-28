@@ -21,8 +21,9 @@ namespace flappy_bird
         Rectangle bird;
         double gravity = 0.05;
         double velocity = 0;
-        double ugrasSpeed = -3;
-        List<Rectangle> oszlopok = new List<Rectangle>();
+        double ugrasSpeed = 3;
+        List<Rectangle> oszlopokTop = new List<Rectangle>();
+        List<Rectangle> oszlopokBot = new List<Rectangle>();
         Random rnd = new Random();
         double elozoPos = 800;
 
@@ -67,12 +68,12 @@ namespace flappy_bird
                 Width = oszlopWidht
             };
 
-            oszlopok.Add(oszlop);
-            oszlopok.Add(oszlopBottom);
+            oszlopokTop.Add(oszlop);
+            oszlopokBot.Add(oszlopBottom);
             canvas.Children.Add(oszlop);
             canvas.Children.Add(oszlopBottom);
 
-            double oszlopLeftPos = elozoPos + rnd.Next(100, 200);
+            double oszlopLeftPos = elozoPos + rnd.Next(150, 200);
             Canvas.SetLeft(oszlop, oszlopLeftPos);
             Canvas.SetLeft(oszlopBottom, oszlopLeftPos);
             Canvas.SetTop(oszlop, 0);
@@ -98,25 +99,37 @@ namespace flappy_bird
                 }
 
                 //--oszlop--
-                for (int i = 0; i < oszlopok.Count; i++)
+                for (int i = 0; i < oszlopokBot.Count; i++)
                 {
-                    double oszlopPos = Canvas.GetLeft(oszlopok[i]);
-                    Canvas.SetLeft(oszlopok[i], oszlopPos - 1);
+                    Rectangle oszlopTop = oszlopokTop[i];
+                    Rectangle oszlopBot = oszlopokBot[i];
+                    double oszlopPos = Canvas.GetLeft(oszlopTop);
+                    Canvas.SetLeft(oszlopTop, oszlopPos - 1);
+                    Canvas.SetLeft(oszlopBot, oszlopPos - 1);
                     if (oszlopPos < -40)
                     {
-                        canvas.Children.Remove(oszlopok[i]);
-                        oszlopok.RemoveAt(i);
+                        canvas.Children.Remove(oszlopTop);
+                        oszlopokBot.RemoveAt(i);
+                        oszlopokTop.RemoveAt(i);
                         UjOszlop();
                     }
+
+                    
+                    //label.Content = Canvas.GetTop(oszlopTop) + " - "+Canvas.GetTop(rectangleBird);
                 }
 
                 await Task.Delay(10);
+                //Canvas.SetTop(hitbox, Canvas.GetTop(oszlopokBot[0]));
+                //Canvas.SetLeft(hitboxvertical, Canvas.GetLeft(oszlopokTop[0]) + oszlopokTop[0].Width);
+                label.Content = oszlopokTop[0].Height + " - " + Canvas.GetTop(rectangleBird);
+
+                if ((Canvas.GetTop(oszlopokBot[0]) <= Canvas.GetTop(rectangleBird)+30 || oszlopokTop[0].Height>= (Canvas.GetTop(rectangleBird) - 30)) && Canvas.GetLeft(rectangleBird) > Canvas.GetLeft(oszlopokTop[0]) && Canvas.GetLeft(rectangleBird)<  Canvas.GetLeft(oszlopokTop[0]) + oszlopokTop[0].Width) { Halal(); }
             }
         }
 
         public void Ugras()
         {
-            velocity = ugrasSpeed;
+            velocity = -ugrasSpeed;
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -130,6 +143,11 @@ namespace flappy_bird
         public void Halal() 
         {
             Application.Current.Shutdown();
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Ugras();
         }
     }
 }

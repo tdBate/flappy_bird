@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:flappy_bird"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" KeyDown="Window_KeyDown" ResizeMode="NoResize">
+        Title="MainWindow" Height="450" Width="800" KeyDown="Window_KeyDown" ResizeMode="NoResize" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
         <Canvas x:Name="canvas">
-            <Rectangle x:Name="rectangleBird" Height="75" Width="75" Canvas.Left="45" Canvas.Top="31" RenderTransformOrigin="0.5,0.5">
+            <Rectangle x:Name="rectangleBird" Height="60" Width="60" Canvas.Left="45" Canvas.Top="31" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/madar.png" Stretch="Fill"/>
                 </Rectangle.Fill>
@@ -21,8 +21,9 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
+            <Label x:Name="label" Content="Label" Canvas.Left="382" Canvas.Top="23" FontSize="36"/>
 
-            
+
         </Canvas>
     </Grid>
 </Window>

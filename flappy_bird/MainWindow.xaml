@@ -30,6 +30,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
+            <Label x:Name="lbScore" Content="Label" Canvas.Left="550" Canvas.Top="74"/>
 
 
         </Canvas>

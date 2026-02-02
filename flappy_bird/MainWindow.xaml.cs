@@ -26,6 +26,8 @@ namespace flappy_bird
         List<Rectangle> oszlopokBot = new List<Rectangle>();
         Random rnd = new Random();
         double elozoPos = 800;
+        int pontSzam = 0;
+        bool athaladas = true;
 
         public MainWindow()
         {
@@ -118,11 +120,32 @@ namespace flappy_bird
                     //label.Content = Canvas.GetTop(oszlopTop) + " - "+Canvas.GetTop(rectangleBird);
                 }
 
-                
-                bool oszlopCollisionWidth = (Canvas.GetLeft(oszlopokTop[0]) + oszlopokTop[0].Width>Canvas.GetLeft(rectangleBird) && Canvas.GetLeft(rectangleBird) + rectangleBird.Width > Canvas.GetLeft(oszlopokTop[0]));
+
+                //collision check
+                bool widhtCheckRight = Canvas.GetLeft(oszlopokTop[0]) + oszlopokTop[0].Width > Canvas.GetLeft(rectangleBird);
+                bool widthCheckLeft = Canvas.GetLeft(rectangleBird) + rectangleBird.Width > Canvas.GetLeft(oszlopokTop[0]);
+
+                //bool oszlopCollisionWidth = (Canvas.GetLeft(oszlopokTop[0]) + oszlopokTop[0].Width>Canvas.GetLeft(rectangleBird) && Canvas.GetLeft(rectangleBird) + rectangleBird.Width > Canvas.GetLeft(oszlopokTop[0]));
+                bool oszlopCollisionWidth = widhtCheckRight && widthCheckLeft;
                 bool oszlopColliisionHeight = (Canvas.GetTop(oszlopokBot[0]) < Canvas.GetTop(rectangleBird)+rectangleBird.Height || oszlopokTop[0].Height > (Canvas.GetTop(rectangleBird)));
 
                 if (oszlopCollisionWidth && oszlopColliisionHeight) Halal();
+
+                //pontszam
+                if (oszlopCollisionWidth)
+                {
+                    athaladas = true;
+                }
+
+                if (widhtCheckRight == false&&athaladas)
+                {
+                    pontSzam++;
+                    athaladas = false;
+                }
+
+
+
+                lbScore.Content = pontSzam;
 
                 await Task.Delay(10);
             }

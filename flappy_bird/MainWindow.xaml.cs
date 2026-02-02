@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows;
@@ -18,14 +19,19 @@ namespace flappy_bird
     /// </summary>
     public partial class MainWindow : Window
     {
-        Rectangle bird;
+        //fizikai változók
         double gravity = 0.05;
         double velocity = 0;
         double ugrasSpeed = 2.5;
+
+        //objektumok
+        Rectangle bird;
         List<Rectangle> oszlopokTop = new List<Rectangle>();
         List<Rectangle> oszlopokBot = new List<Rectangle>();
         Random rnd = new Random();
-        double elozoPos = 800;
+        Rectangle elozoOszlop;
+
+        //logikai változók
         int pontSzam = 0;
         bool athaladas = true;
 
@@ -75,12 +81,14 @@ namespace flappy_bird
             canvas.Children.Add(oszlop);
             canvas.Children.Add(oszlopBottom);
 
-            double oszlopLeftPos = elozoPos + rnd.Next(150, 200);
+            double oszlopLeftPos =800;
+            if (elozoOszlop != null) { oszlopLeftPos = Canvas.GetLeft(elozoOszlop) + rnd.Next(250, 300); }
             Canvas.SetLeft(oszlop, oszlopLeftPos);
             Canvas.SetLeft(oszlopBottom, oszlopLeftPos);
             Canvas.SetTop(oszlop, 0);
             Canvas.SetTop(oszlopBottom, -gap + 450 - oszlopHeight);
-            elozoPos = Canvas.GetLeft(oszlop);
+
+            elozoOszlop = oszlop;
         }
 
         public async void Animation() 
@@ -88,7 +96,6 @@ namespace flappy_bird
             while (true)
             { 
                 //madar
-
                 velocity += gravity;
 
                 double topPos = Canvas.GetTop(bird);
@@ -142,8 +149,6 @@ namespace flappy_bird
                     pontSzam++;
                     athaladas = false;
                 }
-
-
 
                 lbScore.Content = pontSzam;
 

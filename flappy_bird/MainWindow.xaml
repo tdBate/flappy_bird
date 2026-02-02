@@ -31,6 +31,8 @@
                 </Rectangle.RenderTransform>
             </Rectangle>
             <Label x:Name="lbScore" Content="Label" Canvas.Left="550" Canvas.Top="74"/>
+            <Label x:Name="lbTest" Content="lbTest" Canvas.Left="291" Canvas.Top="317"/>
+
 
 
         </Canvas>

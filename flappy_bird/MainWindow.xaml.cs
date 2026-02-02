@@ -121,9 +121,14 @@ namespace flappy_bird
                 await Task.Delay(10);
                 //Canvas.SetTop(hitbox, Canvas.GetTop(oszlopokBot[0]));
                 //Canvas.SetLeft(hitboxvertical, Canvas.GetLeft(oszlopokTop[0]) + oszlopokTop[0].Width);
-                label.Content = oszlopokTop[0].Height + " - " + Canvas.GetTop(rectangleBird);
+                bool oszlopCollisionWidth = (Canvas.GetLeft(oszlopokTop[0]) + oszlopokTop[0].Width>Canvas.GetLeft(rectangleBird) && Canvas.GetLeft(rectangleBird) + rectangleBird.Width > Canvas.GetLeft(oszlopokTop[0]));
+                bool oszlopColliisionHeight = (Canvas.GetTop(oszlopokBot[0]) < Canvas.GetTop(rectangleBird)+rectangleBird.Height || oszlopokTop[0].Height > (Canvas.GetTop(rectangleBird)));
+                label.Content = oszlopColliisionHeight.ToString();
 
-                if ((Canvas.GetTop(oszlopokBot[0]) <= Canvas.GetTop(rectangleBird)+30 || oszlopokTop[0].Height>= (Canvas.GetTop(rectangleBird) - 30)) && Canvas.GetLeft(rectangleBird) > Canvas.GetLeft(oszlopokTop[0]) && Canvas.GetLeft(rectangleBird)<  Canvas.GetLeft(oszlopokTop[0]) + oszlopokTop[0].Width) { Halal(); }
+                if (oszlopCollisionWidth && oszlopColliisionHeight) Halal(); 
+
+                //if (Canvas.GetLeft(rectangleBird) + rectangleBird.Width > Canvas.GetLeft(oszlopokTop[0]))
+                //if ((Canvas.GetTop(oszlopokBot[0]) <= Canvas.GetTop(rectangleBird)+30 || oszlopokTop[0].Height>= (Canvas.GetTop(rectangleBird) - 30)) && Canvas.GetLeft(rectangleBird) > Canvas.GetLeft(oszlopokTop[0]) && Canvas.GetLeft(rectangleBird)<  Canvas.GetLeft(oszlopokTop[0]) + oszlopokTop[0].Width) { continue; Halal(); }
             }
         }
 

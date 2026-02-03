@@ -64,14 +64,14 @@ namespace flappy_bird
 
             Rectangle oszlop = new Rectangle()
             {
-                Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6CFF00"),
+                Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#429e00"),
                 Height = oszlopHeight - gap,
                 Width = oszlopWidht
             };
 
             Rectangle oszlopBottom = new Rectangle()
             {
-                Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6CFF00"),
+                Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#429e00"),
                 Height = oszlopHeight + gap,
                 Width = oszlopWidht
             };
@@ -150,7 +150,7 @@ namespace flappy_bird
                     athaladas = false;
                 }
 
-                lbScore.Content = pontSzam;
+                lbScore.Content = "Score: "+pontSzam;
 
                 await Task.Delay(10);
             }

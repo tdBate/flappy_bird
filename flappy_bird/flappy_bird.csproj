@@ -9,10 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="istockphoto-1333010525-612x612.jpg" />
     <None Remove="madar.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="istockphoto-1333010525-612x612.jpg" />
     <Resource Include="madar.png" />
   </ItemGroup>
 

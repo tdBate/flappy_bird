@@ -39,8 +39,6 @@ namespace flappy_bird
         {
             InitializeComponent();
             bird = rectangleBird;
-            SetUp();
-            Animation();
         } 
 
         public async void SetUp()
@@ -48,7 +46,6 @@ namespace flappy_bird
             for (int i = 0; i < 8; i++) 
             {
                 UjOszlop();
-                //await Task.Delay(3000);
             }
             
         }
@@ -93,8 +90,9 @@ namespace flappy_bird
 
         public async void Animation() 
         {
+           
             while (true)
-            { 
+            {
                 //madar
                 velocity += gravity;
 
@@ -105,6 +103,7 @@ namespace flappy_bird
                 if (topPos >= 450-bird.Height)
                 {
                     Halal();
+                    return;
                 }
 
                 //--oszlop--
@@ -136,7 +135,11 @@ namespace flappy_bird
                 bool oszlopCollisionWidth = widhtCheckRight && widthCheckLeft;
                 bool oszlopColliisionHeight = (Canvas.GetTop(oszlopokBot[0]) < Canvas.GetTop(rectangleBird)+rectangleBird.Height || oszlopokTop[0].Height > (Canvas.GetTop(rectangleBird)));
 
-                if (oszlopCollisionWidth && oszlopColliisionHeight) Halal();
+                if (oszlopCollisionWidth && oszlopColliisionHeight)
+                {
+                    Halal();
+                    return;
+                }
 
                 //pontszam
                 if (oszlopCollisionWidth)
@@ -148,9 +151,8 @@ namespace flappy_bird
                 {
                     pontSzam++;
                     athaladas = false;
+                    lbScore.Content = "Score: " + pontSzam;
                 }
-
-                lbScore.Content = "Score: "+pontSzam;
 
                 await Task.Delay(10);
             }
@@ -169,14 +171,60 @@ namespace flappy_bird
             }
         }
 
+        private void PalyaReset()
+        {
+            canvas.Children.Clear();
+            canvas.Children.Add(bird);
+            Canvas.SetTop(bird, 200);
+            oszlopokBot.Clear();
+            oszlopokTop.Clear();
+
+            elozoOszlop = null;
+            pontSzam = 0;
+            athaladas = true;
+            velocity = 0;
+
+            lbScore.Content = "Score: " + 0;
+        }
+
         public void Halal() 
         {
-            Application.Current.Shutdown();
+            MenuBelep();
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Ugras();
+        }
+
+        private void MenuKilep()
+        {
+            menu.Visibility = Visibility.Hidden;
+            menuHatter.Visibility = Visibility.Hidden;
+        }
+
+        private void MenuBelep()
+        {
+            menu.Visibility = Visibility.Visible;
+            menuHatter.Visibility = Visibility.Visible;
+        }
+
+        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbEso.IsChecked == true)
+            {
+                
+            }
+
+            if (cbKod.IsChecked == true)
+            {
+                
+            }
+
+            PalyaReset();
+            MenuKilep();
+            SetUp();
+            Animation();
         }
     }
 }

@@ -9,8 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="9d9a23a4d99de3a7fae1a34e5972a4b7.gif" />
     <None Remove="istockphoto-1333010525-612x612.jpg" />
     <None Remove="madar.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="9d9a23a4d99de3a7fae1a34e5972a4b7.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>

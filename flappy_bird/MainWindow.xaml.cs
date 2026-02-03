@@ -183,6 +183,7 @@ namespace flappy_bird
             pontSzam = 0;
             athaladas = true;
             velocity = 0;
+            gravity = 0.05;
 
             lbScore.Content = "Score: " + 0;
         }
@@ -205,6 +206,8 @@ namespace flappy_bird
 
         private void MenuBelep()
         {
+            imgEso.Visibility = Visibility.Hidden;
+
             menu.Visibility = Visibility.Visible;
             menuHatter.Visibility = Visibility.Visible;
         }
@@ -213,7 +216,8 @@ namespace flappy_bird
         {
             if (cbEso.IsChecked == true)
             {
-                
+                imgEso.Visibility = Visibility.Visible;
+                gravity = 0.07;
             }
 
             if (cbKod.IsChecked == true)
@@ -226,5 +230,6 @@ namespace flappy_bird
             SetUp();
             Animation();
         }
+
     }
 }

@@ -42,6 +42,7 @@ namespace flappy_bird
         {
             InitializeComponent();
             bird = rectangleBird;
+            timer.Tick += Timer_Tick;
         } 
 
         public async void SetUp()
@@ -209,6 +210,7 @@ namespace flappy_bird
 
         private void MenuBelep()
         {
+            timer.Stop();
             imgEso.Visibility = Visibility.Hidden;
             kod.Visibility = Visibility.Hidden;
 
@@ -234,7 +236,6 @@ namespace flappy_bird
             if (cbKod.IsChecked == true)
             {
                 timer.Interval = TimeSpan.FromSeconds(rnd.Next(10,20));
-                timer.Tick += Timer_Tick;
                 timer.Start();
             }
 

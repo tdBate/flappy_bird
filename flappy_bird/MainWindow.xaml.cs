@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Transactions;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,7 @@ using System.Windows.Media;
  using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace flappy_bird
 {
@@ -30,6 +32,7 @@ namespace flappy_bird
         List<Rectangle> oszlopokBot = new List<Rectangle>();
         Random rnd = new Random();
         Rectangle elozoOszlop;
+        DispatcherTimer timer = new();
 
         //logikai változók
         int pontSzam = 0;
@@ -207,9 +210,17 @@ namespace flappy_bird
         private void MenuBelep()
         {
             imgEso.Visibility = Visibility.Hidden;
+            kod.Visibility = Visibility.Hidden;
 
             menu.Visibility = Visibility.Visible;
             menuHatter.Visibility = Visibility.Visible;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (kod.Visibility == Visibility.Visible) { kod.Visibility = Visibility.Hidden; }
+            else { kod.Visibility = Visibility.Visible; }
+            timer.Interval = TimeSpan.FromSeconds(rnd.Next(10, 20));
         }
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
@@ -222,7 +233,9 @@ namespace flappy_bird
 
             if (cbKod.IsChecked == true)
             {
-                
+                timer.Interval = TimeSpan.FromSeconds(rnd.Next(10,20));
+                timer.Tick += Timer_Tick;
+                timer.Start();
             }
 
             PalyaReset();

@@ -9,8 +9,9 @@
         Title="MainWindow" Height="450" Width="800" KeyDown="Window_KeyDown" ResizeMode="NoResize" MouseLeftButtonDown="Window_MouseLeftButtonDown">
   
     <Grid>
-
+    
         <Image Source="/istockphoto-1333010525-612x612.jpg" Stretch="Fill"/>
+
         <Canvas x:Name="canvas">
             <Rectangle x:Name="rectangleBird" Height="60" Width="60" Canvas.Left="45" Canvas.Top="31" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.Fill>
@@ -36,6 +37,18 @@
             </Rectangle>
             <Label x:Name="lbTest" Content="" Canvas.Left="291" Canvas.Top="317"/>
         </Canvas>
+        
+        
+        
+        <Rectangle x:Name="kod" Visibility="Hidden" Width="800" Height="450">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="#3FB9B9B9"/>
+                    <GradientStop Color="#FFB9B9B9" Offset="0.547"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Image x:Name="imgEso" Visibility="Hidden" gif:ImageBehavior.AnimatedSource="9d9a23a4d99de3a7fae1a34e5972a4b7.gif" gif:ImageBehavior.AutoStart="True" gif:ImageBehavior.RepeatBehavior="Forever" Stretch="Fill"  />
         <Label x:Name="lbScore" Content="Score: 0" Foreground="White" FontSize="36" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="625,10,0,0"/>
         <Rectangle x:Name="menuHatter">
             <Rectangle.Fill>
@@ -52,16 +65,12 @@
             <Button x:Name="btnPlay" Width="150px" Height="30px" Background="#41DDDDDD" BorderBrush="#00707070" Foreground="White" Content="Játék" Click="btnPlay_Click"/>
             <Border Width="150px" Height="30px" Background="#41DDDDDD" HorizontalAlignment="Center">
                 <CheckBox x:Name="cbEso" Content="Eső" Foreground="White" VerticalContentAlignment="Center"></CheckBox>
-                
+
             </Border>
             <Border Width="150px" Height="30px" Background="#41DDDDDD" HorizontalAlignment="Center">
                 <CheckBox x:Name="cbKod" Content="Köd" Foreground="White" VerticalContentAlignment="Center"></CheckBox>
 
             </Border>
-
-
-
         </StackPanel>
-        <Image x:Name="imgEso" Visibility="Hidden" gif:ImageBehavior.AnimatedSource="9d9a23a4d99de3a7fae1a34e5972a4b7.gif" gif:ImageBehavior.AutoStart="True" gif:ImageBehavior.RepeatBehavior="Forever" Stretch="Fill"  />
     </Grid>
 </Window>
